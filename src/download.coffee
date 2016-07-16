@@ -50,7 +50,9 @@ module.exports = (url, destinationDir, fileName, callback) ->
   hash = null
 
   # fileOptions = { url, name: fileName }
-  output = path.join(destinationDir, fileName)
+  # .slice(1) nasty hack to remove forward slash at beginning of string
+  # I think this was causing download not to save the file
+  output = path.join(destinationDir, fileName).slice 1
   console.log 'src/download:54 >> ', url, output
   console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
 

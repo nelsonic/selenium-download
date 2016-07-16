@@ -31,12 +31,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ###
 
 fs = require('fs')
+path = require('path')
 {createHash} = require('crypto')
 
 module.exports = (filePath, checksum, callback) ->
   hash = createHash('md5')
 
-  stream = fs.ReadStream(filePath)
+  stream = fs.ReadStream(path.join(__dirname, '..', filePath, 'chromedriver_linux64.zip'))
 
   stream.on 'data', (data) ->
     hash.update(data)
@@ -49,3 +50,6 @@ module.exports = (filePath, checksum, callback) ->
 
     callback()
 
+  stream.on 'error', (error) ->
+    console.log 'download failed'
+    console.error error
