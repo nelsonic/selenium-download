@@ -49,3 +49,6 @@ module.exports = (filePath, checksum, callback) ->
 
     callback()
 
+  stream.on 'error', (error) ->
+    console.log 'download failed'
+    console.error error
